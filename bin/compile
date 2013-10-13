@@ -235,7 +235,7 @@ then
 
 
 	if [ ! -r ${BUILD_DIR}/app/config/parameters.yml ]; then
-		if [ ! -r ${BUILD_DIR}/app/config/parameters_prod.yml.erb ]; then
+		if [ -r ${BUILD_DIR}/app/config/parameters_prod.yml.erb ]; then
 			erb ${BUILD_DIR}/app/config/parameters_prod.yml.erb > ${BUILD_DIR}/app/config/parameters.yml
 		else
 
@@ -308,7 +308,7 @@ if [ -d /app/conf ]; then
 
 	# Symfony2 database detection
 	if [ -r /app/app/config/parameters_prod.yml.erb ]; then
-		erb /app/conf/parameters_prod.yml.erb > /app/app/config/parameters.yml
+		erb /app/app/config/parameters_prod.yml.erb > /app/app/config/parameters.yml
 	fi
 
 	mkdir -p /app/conf/nginx.d
