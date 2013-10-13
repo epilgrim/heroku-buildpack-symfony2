@@ -9,6 +9,8 @@ fi
 
 DIR="$( cd -P "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 
+echo $DIR
+
 # build and package nginx for heroku
 vulcan build -v -o php-${PHP_VERSION}-with-fpm-heroku.tar.gz -p /app/vendor/php -c './vulcan-build-php.sh' -s "$DIR"
 
