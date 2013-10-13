@@ -1,0 +1,22 @@
+<%
+require 'uri'
+
+pg_uri = URI.parse(ENV['HEROKU_POSTGRESQL_RED_URL'])
+
+%>
+
+parameters:
+    database_driver:   pdo_pgsql
+    database_host:     <%= pg_uri.host %>
+    database_port:     <%= pg_uri.port %>
+    database_name:     <%= pg_uri.path[1..-1] %>
+    database_user:     <%= pg_uri.user %>
+    database_password: <%= pg_uri.password %>
+
+    mailer_transport:  smtp
+    mailer_host:       127.0.0.1
+    mailer_user:       ~
+    mailer_password:   ~
+
+    locale:            en
+    secret:            KV76spx3xEHuDgEHKBBSZidHwNi3iB2+FvHJo9D
