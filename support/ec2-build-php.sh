@@ -5,12 +5,14 @@
 ## EDIT
 export S3_BUCKET="heroku-buildpack-php-tyler"
 export LIBMCRYPT_VERSION="2.5.9"
-export PHP_VERSION="5.4.12"
+export LIFREETYPE_VERSION="2.4.12"
+export PHP_VERSION="5.4.17"
 export APC_VERSION="3.1.10"
 export PHPREDIS_VERSION="2.2.2"
 export LIBMEMCACHED_VERSION="1.0.7"
 export MEMCACHED_VERSION="2.0.1"
-export NEWRELIC_VERSION="3.2.5.143"
+export NEWRELIC_VERSION="2.9.5.78"
+
 export LIBICU_VERSION="50.1.2"
 ## END EDIT
 
@@ -70,6 +72,10 @@ echo "+ Fetching libicu libraries..."
 mkdir -p /app/local
 curl -L "https://s3.amazonaws.com/${S3_BUCKET}/libicu-${LIBICU_VERSION}.tar.gz" -o - | tar xz -C /app/local
 
+echo "+ Fetching freetype libraries..."
+mkdir -p /app/local
+curl -L "http://download.savannah.gnu.org/releases/freetype/freetype-${LIFREETYPE_VERSION}.tar.gz" -o - | tar xz -C /app/local
+
 echo "+ Fetching PHP sources..."
 #fetch php, extract
 curl -L http://us.php.net/get/php-$PHP_VERSION.tar.bz2/from/www.php.net/mirror -o - | tar xj
@@ -112,6 +118,7 @@ echo "+ Configuring PHP..."
 --with-pgsql \
 --with-pdo-pgsql \
 --with-png-dir \
+--with-freetype-dir=/app/local \
 --with-zlib
 
 echo "+ Compiling PHP..."
